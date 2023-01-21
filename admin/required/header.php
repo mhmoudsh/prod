@@ -5,19 +5,19 @@
           <li><a class="nav-link scrollto active" href="index.php">الرئيسية</a></li>
  
        <?php  if (!isLoggedIn()) {
-               echo '<li><a href="login.php">دخول</a></li>';
+               echo '<li><a href="login.php">sign in</a></li>';
              }
 
              
                echo '
-                     <li><a class="nav-link scrollto" href="readCounter.php">قراءة عداد  </a></li>
-                     <li><a class="nav-link scrollto" href="payments.php">الدفعات </a></li>
-                     <li><a class="nav-link scrollto" href="Invoices.php">الفواتير </a></li>
-                     <li><a class="nav-link scrollto" href="users.php"> المستخدمين </a></li>
+                     
+                     <li><a class="nav-link scrollto" href="producttable.php">product </a></li>
+                     <li><a class="nav-link scrollto" href="Invoices.php">sub categories </a></li>
+                     <li><a class="nav-link scrollto" href="users.php"> categories </a></li>
                      <li><a href="">'. $_SESSION['user']['user_name'].'</a></li>
                      <li class="dropdown"><a href="#"><span></span> <i class="bi bi-chevron-down"></i></a>
                      <ul>
-                     <li class="dropdown"><a href="index.php?logout=\'1\'"><span>تسجيل  الخروج</span></a></li>
+                     <li class="dropdown"><a href="index.php?logout=\'1\'"><span>signout</span></a></li>
                      </ul>
                      </li>
 

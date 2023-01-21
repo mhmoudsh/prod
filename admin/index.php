@@ -55,7 +55,7 @@ include_once('required/header.php');
 
 
 <?php
-include_once('../required/footer.php');
+include_once('required/footer.php');
 ?>
  
   <!-- Vendor JS Files -->
