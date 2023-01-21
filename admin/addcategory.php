@@ -28,7 +28,7 @@ if (!isLoggedIn()) {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title> Products</title>
+    <title> شركة الكهرباء </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
@@ -87,43 +87,17 @@ if (!isLoggedIn()) {
                                                      placeholder="description" name="description" />
                                              </div>
                                          </div>
+                                         
                                          <div class="col-md-6 col-12">
-                                             <div class="form-group">
-                                                 <label for="price">Product Price:</label>
-                                                 <input class="form-control" type="text" placeholder="price" id="price"
-                                                     name="price" />
-                                             </div>
-                                         </div>
-                                         <!-- <div class="col-md-6 col-12">
                                              <div class="form-group">
                                                  <label for="image">image</label>
                                                  <input type="file" id="image" class="form-control"
                                                      placeholder="image" class="form-control" 
                                                      name="image" />
                                              </div>
-                                         </div> -->
+                                         </div>
 
-                                           <div class="col-md-6 col-12">
-                                               <div class="form-group">
-                                                   <label class="form-label" for="user-role">sub_category</label>
-                                                   <select name="sub_id" id="sub_id"
-                                                       class="form-control form-control-sm">
-                                                       <option value="">Select </option>
-                                                       <?php 
-                                                            $query ="SELECT id, name FROM sub_cats";
-                                                            $result = $db->query($query);
-                                                            if($result->num_rows> 0){
-                                                                while($optionData=$result->fetch_assoc()){
-                                                                $option =$optionData['name'];
-                                                                $id =$optionData['id'];
-                                                        ?>
-                                                       <option value="<?php echo $id; ?>"><?php echo $option; ?>
-                                                       </option>
-                                                       <?php
-                                                         }}
-                                                        ?>
-                                                   </select>
-                                               </div>
+                                           
                                                <div class="col-12">
                                                 <input type="submit" name="prod_add" class="btn btn-primary"
                                                     value="add">                                                   

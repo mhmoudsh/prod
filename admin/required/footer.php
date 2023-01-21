@@ -1,4 +1,4 @@
-  <!-- ======= Footer ======= -->
+  <!-- ======= Footer ======= 
   <footer id="footer" class="footer" dir="rtl">
      <div class="footer-top">
       <div class="container">
@@ -50,6 +50,7 @@
         &copy; <strong><span>       شركة الطاقة الفلسطينية   </span></strong>.جميع  حقوق النشر محفوظة
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer><!-- End Footer 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  -->

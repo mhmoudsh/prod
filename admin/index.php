@@ -6,11 +6,11 @@ if (!isLoggedIn()) {
 
 ?>
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>  شركة الكهرباء  </title>
+  <title>  product  </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <!-- Favicons -->
@@ -34,7 +34,7 @@ if (!isLoggedIn()) {
 <?php 
 include_once('required/header.php');
 ?>
- <section id="hero" class="d-flex align-items-center" dir="rtl">
+ <!-- <section id="hero" class="d-flex align-items-center" dir="ltr">
      <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-2 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center" align="right">
@@ -51,7 +51,7 @@ include_once('required/header.php');
       </div>
     </div>
 
-  </section>
+  </section> -->
 
 
 <?php

@@ -6,7 +6,7 @@ if (!isLoggedIn()) {
      header('location: ..\login.php');
   }
   
-  $sql = "SELECT * FROM sub_cats";
+  $sql = "SELECT * FROM categories";
   $result = mysqli_query($db, $sql);
   
 
@@ -28,7 +28,7 @@ if (!isLoggedIn()) {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title> Products</title>
+    <title> Sub Categories </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
@@ -80,37 +80,25 @@ if (!isLoggedIn()) {
                                                      placeholder="name" name="name" />
                                              </div>
                                          </div>
+                                         
+                                        
                                          <div class="col-md-6 col-12">
-                                             <div class="form-group">
-                                                 <label for="description">description</label>
-                                                 <input type="text" id="description" class="form-control"
-                                                     placeholder="description" name="description" />
-                                             </div>
-                                         </div>
-                                         <div class="col-md-6 col-12">
-                                             <div class="form-group">
-                                                 <label for="price">Product Price:</label>
-                                                 <input class="form-control" type="text" placeholder="price" id="price"
-                                                     name="price" />
-                                             </div>
-                                         </div>
-                                         <!-- <div class="col-md-6 col-12">
                                              <div class="form-group">
                                                  <label for="image">image</label>
                                                  <input type="file" id="image" class="form-control"
                                                      placeholder="image" class="form-control" 
                                                      name="image" />
                                              </div>
-                                         </div> -->
+                                         </div>
 
                                            <div class="col-md-6 col-12">
                                                <div class="form-group">
-                                                   <label class="form-label" for="user-role">sub_category</label>
+                                                   <label class="form-label" for="user-role">category</label>
                                                    <select name="sub_id" id="sub_id"
                                                        class="form-control form-control-sm">
                                                        <option value="">Select </option>
                                                        <?php 
-                                                            $query ="SELECT id, name FROM sub_cats";
+                                                            $query ="SELECT id, name FROM categories";
                                                             $result = $db->query($query);
                                                             if($result->num_rows> 0){
                                                                 while($optionData=$result->fetch_assoc()){
@@ -124,13 +112,12 @@ if (!isLoggedIn()) {
                                                         ?>
                                                    </select>
                                                </div>
-                                               <div class="col-12">
-                                                <input type="submit" name="prod_add" class="btn btn-primary"
-                                                    value="add">                                                   
-                                                   <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                                               </div>
+                                               
                                            </div>
-                                         
+                                         <div class="col-12">
+                                             <input type="submit" name="prod_add" class="btn btn-primary" value="add">
+                                             <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                         </div>
                                          
                                     </div>
                                 </form>
