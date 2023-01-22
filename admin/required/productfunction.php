@@ -57,7 +57,7 @@ function show_prod()
     global $db, $conn, $errors;
     $id = e($_POST['id']);    
     $_SESSION['product'] = $id;
-    header('location: edit_product.php');
+    header('location: view_product.php');
 }
 
 function edit_prod()

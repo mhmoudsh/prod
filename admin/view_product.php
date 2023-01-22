@@ -6,20 +6,25 @@ if (!isLoggedIn()) {
      header('location: ..\login.php');
   }
   
-  $sql = "SELECT * FROM sub_cats";
-  $result = mysqli_query($conn, $sql);
+  $id=$_SESSION['product'];    
+  $query = "SELECT * FROM proudcts WHERE id= $id";
+  $product = $conn->query($query);
+  $prod_data=$product->fetch_assoc();
+
+  $subid=$prod_data['sub_id'];  
+  $query = "SELECT * FROM sub_cats WHERE id= $subid";  
+  $result = $conn->query($query);
+  
+  if($result->num_rows> 0){
+    $sub=$result->fetch_assoc();
+    $sub_name=$sub['name'];
+  }else{
+    $sub_name='no data found';
+  }
   
 
 
-/* if (isset($_POST['addNewValue'])) {
 
-  $sql = "UPDATE invoices SET status =1 where id=".$_POST['id']."";
-  echo $sql;
-  mysqli_query($db, $sql);
-  header('location: payments.php');
- 
-
-}  */
 
 ?>
 <!DOCTYPE html>
@@ -67,6 +72,7 @@ if (!isLoggedIn()) {
                         <div class="card-header" id="print">
 
                             <h5 class="card-title">Product:</h5>
+                            <!-- <?php echo $sub['name'];?> -->
                             
                         </div>
                         <div class="card-body">
@@ -75,54 +81,42 @@ if (!isLoggedIn()) {
                                      <div class="row">
                                          <div class="col-md-6 col-12">
                                              <div class="form-group">
+                                                <input type="hidden" name="id" value="<?php echo $prod_data['id'];?>">
                                                  <label for="name">name </label>
-                                                 <input type="text" id="name" class="form-control"
-                                                     placeholder="name" name="name" />
+                                                 <input disabled type="text" id="name" class="form-control"
+                                                     placeholder="name"
+                                                     value="<?php echo $prod_data['name'];?>" name="name" />
                                              </div>
                                          </div>
                                          <div class="col-md-6 col-12">
                                              <div class="form-group">
                                                  <label for="description">description</label>
-                                                 <input type="text" id="description" class="form-control"
-                                                     placeholder="description" name="description" />
+                                                 <input disabled type="text" id="description" class="form-control"
+                                                     placeholder="description"
+                                                     value="<?php echo $prod_data['description'];?>"
+                                                     name="description" />
                                              </div>
                                          </div>
                                          <div class="col-md-6 col-12">
                                              <div class="form-group">
                                                  <label for="price">Product Price:</label>
-                                                 <input class="form-control" type="text" placeholder="price" id="price"
+                                                 <input class="form-control" value="<?php echo $prod_data['price'];?>"
+                                                     type="text" disabled placeholder="price" id="price"
                                                      name="price" />
                                              </div>
-                                         </div>
-                                        
+                                         </div> 
 
-                                           <div class="col-md-6 col-12">
-                                               <div class="form-group">
-                                                   <label class="form-label" for="user-role">sub_category</label>
-                                                   <select name="sub_id" id="sub_id"
-                                                       class="form-control form-control-sm">
-                                                       <option value="">Select </option>
-                                                       <?php 
-                                                            $query ="SELECT id, name FROM sub_cats";
-                                                            $result = $db->query($query);
-                                                            if($result->num_rows> 0){
-                                                                while($optionData=$result->fetch_assoc()){
-                                                                $option =$optionData['name'];
-                                                                $id =$optionData['id'];
-                                                        ?>
-                                                       <option value="<?php echo $id; ?>"><?php echo $option; ?>
-                                                       </option>
-                                                       <?php
-                                                         }}
-                                                        ?>
-                                                   </select>
-                                               </div>
-                                               <div class="col-12">
-                                                <input type="submit" name="prod_add" class="btn btn-primary"
-                                                    value="add">                                                   
-                                                   <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                                               </div>
-                                           </div>
+                                         <div class="col-md-6 col-12">
+                                             <div class="form-group">
+                                                 <label for="price">sub_category:</label>
+                                                 <input class="form-control" value="<?php echo $sub_name;?>"
+                                                     type="text" disabled placeholder="price" id="price"
+                                                     name="price" />
+                                             </div>
+                                         </div>       
+                                          
+                                              
+                                    </div>
                                          
                                          
                                     </div>
