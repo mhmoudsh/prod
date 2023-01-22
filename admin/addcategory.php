@@ -88,20 +88,16 @@ if (!isLoggedIn()) {
                                              </div>
                                          </div>
                                          
-                                         <div class="col-md-6 col-12">
-                                             <div class="form-group">
-                                                 <label for="image">image</label>
-                                                 <input type="file" id="image" class="form-control"
-                                                     placeholder="image" class="form-control" 
-                                                     name="image" />
-                                             </div>
-                                         </div>
+                                         
 
                                            
                                                <div class="col-12">
-                                                <input type="submit" name="prod_add" class="btn btn-primary"
+                                                <input type="submit" name="cat_add" class="btn btn-primary"
                                                     value="add">                                                   
                                                    <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                               </div>
+                                               <div class="col-12">
+                                                <?php display_error(); ?>
                                                </div>
                                            </div>
                                          

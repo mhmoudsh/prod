@@ -1,6 +1,6 @@
 <?php 
 include('required/conection.php');
-include_once('required/productfunction.php');
+include_once('required/sub_cat.php');
 include_once('required/functions.php');
 if (!isLoggedIn()) {
      header('location: ..\login.php');
@@ -55,9 +55,8 @@ if (!isLoggedIn()) {
 
                         <div class="card-body" id="print">
 
-                            <h5 class="card-title">Product:</h5>
-                            <a href=""
-                                class="btn add-new btn-primary mt-50 mb-2">Add New subcat</a>
+                            <h5 class="card-title">sub_category:</h5>
+                            <a href="addsubcategory.php" class="btn add-new btn-primary mt-50 mb-2">Add New subcat</a>
                         </div>
 
                     </div>
@@ -72,8 +71,8 @@ if (!isLoggedIn()) {
                             <table class=" table">
                                 <thead>
                                     <tr>
-                                        <td>name</td>                                        
-                                        <td>image</td>
+                                        <td>name</td>
+                                        <td>action</td>
                                     </tr>
                                 </thead>
 
@@ -84,8 +83,18 @@ if (!isLoggedIn()) {
 
                               while($row = mysqli_fetch_assoc($result)) {
                               echo "<tr>";
-                                  echo "<td>" . $row["name"] . "</td>";                                                         
-                                  echo "<td>" . "<img src=".'"'." uploads/subcat" . $row["image"] .'"'." calss=".'"'."img-fluid".'"'."width=".'"'."100px".'"'. "</td>" ;
+                                  echo "<td>" . $row["name"] . "</td>";
+                                  echo "<td>"."<form "." action=".'"'. htmlspecialchars($_SERVER['PHP_SELF'])
+                                        .'"'.'method="post"' .'>'.
+                                        '<input type="hidden" name="id" value='.'"'.$row["id"].'"'." />".
+                                        '<input type="submit" name="sub_edit" value="edit"'."/>".
+                                        /* ' <input type="submit" name="sub_view" value="view"'."/>". */
+                                        ' <input type="submit" name="sub_delete" value="delete"'."/>".
+                                  ' </form>'."</td>
+                                ";                                                       
+                                  
+                                  /* echo "<td>" . "<img src=".'"'." uploads/subcat" . $row["image"] .'"'." calss=".'"'."img-fluid".'"'."width=".'"'."100px".'"'. "</td>" ; */
+
                                   
                                   echo "</tr>";
                               }

@@ -12,15 +12,7 @@ if (!isLoggedIn()) {
   $result = mysqli_query($conn, $sql);
 
 
-/* if (isset($_POST['addNewValue'])) {
 
-  $sql = "UPDATE invoices SET status =1 where id=".$_POST['id']."";
-  echo $sql;
-  mysqli_query($db, $sql);
-  header('location: payments.php');
- 
-
-}  */
 
 ?>
 <!DOCTYPE html>
@@ -97,11 +89,7 @@ if (!isLoggedIn()) {
                              
 
                               while($row = mysqli_fetch_assoc($result)) {
-                              echo "<tr>";
-                              /* action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" */
-                              /* <input type="text" id="name" class="form-control" placeholder="name" name="name" /> */
-                              /* <input type="submit" name="prod_add" class="btn btn-primary" value="add"> */
-                              /* <a class="nav-link scrollto" href="producttable.php">product </a> */
+                              echo "<tr>";                             
                                   echo "<td>" . $row["name"] . "</td>";
                                   echo "<td>" . $row["price"] . "</td>";
                                   echo "<td>"."<form "."action=".'"'. htmlspecialchars($_SERVER['PHP_SELF']) .'"'.'method="post"' .'>'.

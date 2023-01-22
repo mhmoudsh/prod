@@ -1,6 +1,6 @@
 <?php 
 include('required/conection.php');
-include_once('required/productfunction.php');
+include_once('required/category.php');
 include_once('required/functions.php');
 if (!isLoggedIn()) {
      header('location: ..\login.php');
@@ -19,7 +19,7 @@ if (!isLoggedIn()) {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title> Categories/title>
+    <title> Categories</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
@@ -56,8 +56,7 @@ if (!isLoggedIn()) {
                         <div class="card-body" id="print">
 
                             <h5 class="card-title">Product:</h5>
-                            <a href=""
-                                class="btn add-new btn-primary mt-50 mb-2">Add New subcat</a>
+                            <a href="addcategory.php" class="btn add-new btn-primary mt-50 mb-2">Add New category</a>
                         </div>
 
                     </div>
@@ -72,8 +71,9 @@ if (!isLoggedIn()) {
                             <table class=" table">
                                 <thead>
                                     <tr>
-                                        <td>name</td>                                        
-                                        <td>image</td>
+                                        <td>name</td>                         
+                                        <td>description</td>
+                                        <td>action</td>
                                     </tr>
                                 </thead>
 
@@ -83,12 +83,22 @@ if (!isLoggedIn()) {
                              
 
                               while($row = mysqli_fetch_assoc($result)) {
-                              echo "<tr>";
-                                  echo "<td>" . $row["name"] . "</td>";                                                         
-                                  echo "<td>" . "<img src=".'"'." uploads/cat" . $row["photo"] .'"'."
-                                          calss=".'"'."img-fluid".'"'." width=".'"'."100px".'"'. " </td>" ;
+                                echo "<tr>";
+                                echo "<td>" . $row["name"] . "</td>";                                                         
+                                echo "<td>" . $row["description"] . "</td>";
+                                echo "<td>"."<form "." action=".'"'. htmlspecialchars($_SERVER['PHP_SELF'])
+                                        .'"'.'method="post"' .'>'.
+                                        '<input type="hidden" name="id" value='.'"'.$row["id"].'"'." />".
+                                        '<input type="submit" name="cat_edit" value="edit"'."/>".
+                                        ' <input type="submit" name="cat_show" value="view"'."/>".
+                                        ' <input type="submit" name="cat_delete" value="delete"'."/>".
+                                  ' </form>'."</td>
+                                ";
+                                
+                                
+
                                   
-                                  echo "</tr>";
+                                  
                               }
                               
                             } else {

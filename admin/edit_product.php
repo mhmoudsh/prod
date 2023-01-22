@@ -5,22 +5,12 @@ include_once('required/productfunction.php');
 if (!isLoggedIn()) {
      header('location: ..\login.php');
   }
-  /* $query ="SELECT id, name FROM sub_cats";
-  $result = $db->query($query); */
-  /* edit_prod(); */
-  /* if (mysqli_num_rows($result) > 0) {
-  $row = mysqli_fetch_assoc($result);
-  $name = $row['name'];
-  $description = $row['description'];
-  $price = $row['price'];
-  $category = $row['category']; */
-  /* $optionData=$result->fetch_assoc() */
+  
   $id=$_SESSION['product'];    
   $query = "SELECT * FROM proudcts WHERE id= $id";
   $product = $conn->query($query);
   $prod_data=$product->fetch_assoc();
-  /* unset($_SESSION['product']);
-  echo $_SESSION['product']; */
+  
 
   $sql = "SELECT * FROM sub_cats";
   $result = mysqli_query($conn, $sql);

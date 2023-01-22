@@ -33,35 +33,7 @@ function add_prod(){
     if (empty($des)) {
         array_push($errors, "product description require");
     }
-   /*  if (empty($image)) {
-        array_push($errors, "subcat image require");
-        }
-        else{
-            // File upload path
-            $targetDir = "uploads/";
-            $fileName = basename($_FILES["image"]["name"]);
-            $targetFilePath = $targetDir . $fileName;
-            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-
-
-            // Allow certain file formats
-            $allowTypes = array('jpg','png','jpeg','gif','pdf');
-            if(in_array($fileType, $allowTypes)){
-                // Upload file to server
-                if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)){
-                    // Insert image file name into database
-
-                }
-                else{
-                    array_push($errors, "Sorry, there was an error uploading your file.");
-
-                }
-            }else{
-                array_push($errors, "Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.");
-
-        }
-    } */
-    
+   
     if (empty($sub_id)) {
         array_push($errors, " sub_categoriy is require");
     }
@@ -102,12 +74,8 @@ function update_prod(){
    if (empty($id)) {
     echo "id";
     array_push($errors, "id require");
-   }
-   /* $query = "SELECT * FROM products WHERE id=" . $id;
-   $product = mysqli_query($conn, $query);   
-   $product_arr = [];
-   $subcat_arr = $result->fetch_all(MYSQLI_ASSOC); */
-
+   } 
+   
     global $db, $conn, $errors;
     $name       =   e($_POST['name']);
     $sub_id     =   e($_POST['sub_id']);
@@ -119,33 +87,7 @@ function update_prod(){
         echo "name";
         array_push($errors, "subcat name require");
     }
-     /*if (empty($image)) {
-        $fileName = $subcat['image'];
-        }else{
-         // File upload path
-         $targetDir = "uploads/";
-         $fileName = basename($_FILES["image"]["name"]);
-         $targetFilePath = $targetDir . $fileName;
-         $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-
-
-         // Allow certain file formats
-         $allowTypes = array('jpg','png','jpeg','gif','pdf');
-         if(in_array($fileType, $allowTypes)){
-         // Upload file to server
-         if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)){
-         // Insert image file name into database
-
-         }else{
-         array_push($errors, "Sorry, there was an error uploading your file.");
-
-         }
-         }else{
-         array_push($errors, "Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.");
-
-         }
-        } 
-    */
+     
     
         if (empty($sub_id)) {
             echo "sub";
@@ -168,7 +110,8 @@ function update_prod(){
             header('location: producttable.php');
             unset($_SESSION['product']);
             } else {
-            echo "Error updating record: " . mysqli_error($conn);
+                array_push($errors, "Error updating record: " . mysqli_error($conn));
+            
             }
             /*  */
              

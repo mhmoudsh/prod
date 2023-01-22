@@ -1,14 +1,30 @@
 <?php 
 include('required/conection.php');
-
-include_once('required/sub_cat.php');
+include_once('required/productfunction.php');
 /* include_once('required/functions.php'); */
 if (!isLoggedIn()) {
      header('location: ..\login.php');
   }
   
+  $id=$_SESSION['sub'];
+  $query = "SELECT * FROM sub_cats WHERE id= $id";
+  $sub = $conn->query($query);
+  $prod_data=$sub->fetch_assoc();  
   $sql = "SELECT * FROM categories";
   $result = mysqli_query($conn, $sql);
+  
+
+
+/* if (isset($_POST['addNewValue'])) {
+
+  $sql = "UPDATE invoices SET status =1 where id=".$_POST['id']."";
+  echo $sql;
+  mysqli_query($db, $sql);
+  header('location: payments.php');
+ 
+
+}  */
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +32,7 @@ if (!isLoggedIn()) {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title> Sub Categories </title>
+    <title> Products</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
@@ -63,39 +79,46 @@ if (!isLoggedIn()) {
                                      <div class="row">
                                          <div class="col-md-6 col-12">
                                              <div class="form-group">
+                                                <input type="hidden" name="id" value="<?php echo $prod_data['id'];?>">
                                                  <label for="name">name </label>
                                                  <input type="text" id="name" class="form-control"
-                                                     placeholder="name" name="name" />
+                                                     placeholder="name"
+                                                     value="<?php echo $prod_data['name'];?>" name="name" />
                                              </div>
                                          </div>
-
+                                         
+                                               
                                            <div class="col-md-6 col-12">
                                                <div class="form-group">
                                                    <label class="form-label" for="user-role">category</label>
                                                    <select name="cat_id" id="cat_id"
                                                        class="form-control form-control-sm">
-                                                       <option value="">Select </option>
+                                                       <option value="" disabled>Select </option>
                                                        <?php 
                                                             $query ="SELECT id, name FROM categories";
-                                                            $result = $conn->query($query);
+                                                            $result = $db->query($query);
                                                             if($result->num_rows> 0){
                                                                 while($optionData=$result->fetch_assoc()){
+                                                                $selected = "";
                                                                 $option =$optionData['name'];
                                                                 $id =$optionData['id'];
+                                                                if($id == $prod_data["id"] ) $selected =
+                                                                "selected";
+                                                                echo "<option value='".$id."' ".$selected.">
+                                                                    ".$option."</option>";}}
+                                                                
                                                         ?>
-                                                       <option value="<?php echo $id; ?>"><?php echo $option; ?>
-                                                       </option>
-                                                       <?php
-                                                         }}
-                                                        ?>
+                                                       
+                                                       
                                                    </select>
                                                </div>
-                                               
+                                               <div class="col-12">
+                                                    <input type="submit" name="sub_update" class="btn btn-primary"
+                                                    value="edit">                                                   
+                                                   <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                               </div>
                                            </div>
-                                         <div class="col-12">
-                                             <input type="submit" name="sub_add" class="btn btn-primary" value="add">
-                                             <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                                         </div>
+                                         
                                          
                                     </div>
                                 </form>
