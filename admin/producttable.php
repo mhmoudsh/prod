@@ -5,9 +5,11 @@ include_once('required/functions.php');
 if (!isLoggedIn()) {
      header('location: ..\login.php');
   }
+
+  
   
   $sql = "SELECT * FROM proudcts";
-  $result = mysqli_query($db, $sql);
+  $result = mysqli_query($conn, $sql);
 
 
 /* if (isset($_POST['addNewValue'])) {
@@ -27,7 +29,7 @@ if (!isLoggedIn()) {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title> شركة الكهرباء </title>
+    <title> product </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
@@ -52,7 +54,9 @@ if (!isLoggedIn()) {
 <body>
     
     <!-- ======= Header ======= -->
-
+    <?php
+    include_once('required/header.php');
+    ?>
 
 
     <section class="h-100 h-custom">
@@ -64,7 +68,7 @@ if (!isLoggedIn()) {
                         <div class="card-body" id="print">
 
                             <h5 class="card-title">Product:</h5>
-                            <a href="addproduct.php" class="btn add-new btn-primary mt-50 mb-2">Add New subcat</a>
+                            <a href="addproduct.php" class="btn add-new btn-primary mt-50 mb-2">Add New product</a>
                             
                         </div>
                         
@@ -81,8 +85,9 @@ if (!isLoggedIn()) {
                                 <thead>
                                     <tr>
                                         <td>name</td>
-                                        <td>description</td>
-                                        <td>image</td>
+                                        <td>price</td>
+                                        <td>action</td>
+                                        <!-- <td>image</td> -->
                                     </tr>
                                 </thead>
 
@@ -93,12 +98,22 @@ if (!isLoggedIn()) {
 
                               while($row = mysqli_fetch_assoc($result)) {
                               echo "<tr>";
+                              /* action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" */
+                              /* <input type="text" id="name" class="form-control" placeholder="name" name="name" /> */
+                              /* <input type="submit" name="prod_add" class="btn btn-primary" value="add"> */
+                              /* <a class="nav-link scrollto" href="producttable.php">product </a> */
                                   echo "<td>" . $row["name"] . "</td>";
-                                  echo "<td>" . $row["description"] . "</td>";                          
-                                  echo "<td>" . "<img src=".'"'." uploads/product" . $row["image"] .'"'."
+                                  echo "<td>" . $row["price"] . "</td>";
+                                  echo "<td>"."<form "."action=".'"'. htmlspecialchars($_SERVER['PHP_SELF']) .'"'.'method="post"' .'>'.
+                                        '<input type="hidden" name="id" value='.'"'.$row["id"].'"'."/>".
+                                        '<input type="submit" name="prod_edit" value="edit"'."/>".
+                                        '<input type="submit" name="prod_delete" value="delete"'."/>".
+                                  '</form>'."</td>
+                                  ";
+                                 /*  echo "<td>" . "<img src=".'"'." uploads/product" . $row["image"] .'"'."
                                           calss=".'"'."img-fluid".'"'." width=".'"'."100px".'"'. " </td>" ;
                                   
-                                  echo "</tr>";
+                                  echo "</tr>"; */
                               }
                               
                             } else {

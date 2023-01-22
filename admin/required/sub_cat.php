@@ -1,28 +1,28 @@
 <?php
 include('conection.php');
-if (isset($_POST['prod_add'])) {
-    add_prod();
+if (isset($_POST['sub_add'])) {
+    add_sub();
 }
-if (isset($_POST['prod_edit'])) {
-    edit_prod();
+if (isset($_POST['sub_edit'])) {
+    edit_sub();
 }
-if (isset($_POST['prod_show'])) {
+/* if (isset($_POST['prod_show'])) {
     show_prod();
-}
-if (isset($_POST['prod_delete'])) {
-    delete_prod();
+} */
+if (isset($_POST['sub_delete'])) {
+    delete_sub();
 }
 
-function add_prod(){
+function add_sub(){
     global $db, $errors;
     $name   = e($_POST['name']);
-    $image  = e($_POST['image']);    
+    /* $image  = e($_POST['image']);  */   
     $cat_id = e($_POST['cat_id']);   
 
     if (empty($name)) {
         array_push($errors, "subcat name require");
     }
-    if (empty($image)) {
+    /* if (empty($image)) {
         array_push($errors, "subcat image require");
     }else{
         // File upload path
@@ -47,7 +47,7 @@ function add_prod(){
         array_push($errors, "Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.");
 
         }
-    }
+    } */
     
     if (empty($cat_id)) {
         array_push($errors, " categoriy require");
@@ -56,9 +56,9 @@ function add_prod(){
     
     if (count($errors) == 0) {
     ////////////////////////////////////////////
-        $query = "INSERT INTO subcats (name, image,  cat_id)
-        VALUES('$name', '$fileName', '$des', '$cat_id')";
-        mysqli_query($db, $query);
+        $query = "INSERT INTO sub_cats (name, cat_id)
+        VALUES('$name', '$cat_id')";
+        mysqli_query($conn, $query);
         array_push($success, "subcat added!");
     }
     header('location: admin/subcattable.php');
@@ -66,7 +66,7 @@ function add_prod(){
     
 }
 
-function prod_edit(){
+function edit_sub(){
    $id = e($_POST['id']);
    $db = "SELECT * FROM sub_cats WHERE id=" . $id;
    $subcat = $db->query($query);
@@ -76,14 +76,13 @@ function prod_edit(){
 
     global $db, $errors;
     $name =     e($_POST['name']);
-    $image =    e($_POST['image']);
-    $des =      e($_POST['description']);
+    /* $image =    e($_POST['image']);  */   
     $sub_id =   e($_POST['sub_id']);
 
     if (empty($name)) {
         array_push($errors, "subcat name require");
     }
-    if (empty($image)) {
+    /* if (empty($image)) {
         $fileName = $subcat['image'];
     }else{
          // File upload path
@@ -108,7 +107,7 @@ function prod_edit(){
          array_push($errors, "Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.");
 
          }
-    }
+    } */
     
     if (empty($sub_id)) {
         array_push($errors, "subcat categoriy require");
@@ -117,24 +116,26 @@ function prod_edit(){
    
     if (count($errors) == 0) {
     ////////////////////////////////////////////
-    $query = "UPDATE sub_cats SET name='$name', image='$fileName', sub_id='$sub_id' WHERE
+    $query = "UPDATE sub_cats SET name='$name', sub_id='$sub_id' WHERE
     id='$id' ";
     
-    mysqli_query($db, $query);
+    mysqli_query($conn, $query);
         array_push($success, "subcat updated!");
     }
     header('location: admin/subcattable.php');
 
 }
 
-function delete_subcat(){
+function delete_sub(){
     $id = e($_POST['id']);
-    $sql = "DELETE FROM sub_cats WHERE id='" .$id . "'";
+    
+    $sql = "DELETE FROM sub_cats WHERE id = $id";
+    
     if (mysqli_query($conn, $sql)) {
         array_push($success, "Record deleted successfully!");
         header('location: admin/subcattable.php');
     } else {
-        array_push($errors, "Error deleting subcat");    
+        array_push($errors, "Error deleting subcat". mysqli_error($conn));
     }
    
 }

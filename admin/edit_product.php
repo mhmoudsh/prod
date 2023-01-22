@@ -5,7 +5,23 @@ include_once('required/productfunction.php');
 if (!isLoggedIn()) {
      header('location: ..\login.php');
   }
+  /* $query ="SELECT id, name FROM sub_cats";
+  $result = $db->query($query); */
+  /* edit_prod(); */
+  /* if (mysqli_num_rows($result) > 0) {
+  $row = mysqli_fetch_assoc($result);
+  $name = $row['name'];
+  $description = $row['description'];
+  $price = $row['price'];
+  $category = $row['category']; */
+  /* $optionData=$result->fetch_assoc() */
+  $id=$_SESSION['product'];    
+  $query = "SELECT * FROM products WHERE id= $id";
+  $product = $conn->query($query);
   
+  /* unset($_SESSION['product']);
+  echo $_SESSION['product']; */
+
   $sql = "SELECT * FROM sub_cats";
   $result = mysqli_query($conn, $sql);
   
@@ -67,7 +83,7 @@ if (!isLoggedIn()) {
                         <div class="card-header" id="print">
 
                             <h5 class="card-title">Product:</h5>
-                            
+                            <?php echo $product;?>
                         </div>
                         <div class="card-body">
                              <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST"
