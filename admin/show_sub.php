@@ -19,10 +19,15 @@ if (!isLoggedIn()) {
   $query = "SELECT * FROM sub_cats WHERE id= $id";
   $sub = $conn->query($query);
   $prod_data=$sub->fetch_assoc(); 
-  $cid= $prod_data['cat_id '];
+  $cid= $prod_data['cat_id'];
   $sql = "SELECT * FROM categories WHERE id = $cid";
   $result = mysqli_query($conn, $sql);
-  
+   if($result->num_rows> 0){
+        $cat=$result->fetch_assoc();
+        $cat_name=$sub['name'];
+   }else{
+        $cat_name='no data found';
+   }
 
 
 /* if (isset($_POST['addNewValue'])) {
@@ -95,33 +100,19 @@ if (!isLoggedIn()) {
                                                      placeholder="name"
                                                      value="<?php echo $prod_data['name'];?>" name="name" />
                                              </div>
+                                         
                                          </div>
                                          
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="cat">cat </label>
+                                                    <input disabled type="text" id="cat" class="form-control"
+                                                        placeholder="cat" value="<?php echo $cat_name;?>" cat="cat" />
+                                                </div>
+                                         
+                                         
                                                
-                                           <div class="col-md-6 col-12">
-                                               <div class="form-group">
-                                                   <label class="form-label" for="user-role">category</label>
-                                                   <select name="cat_id" id="cat_id"
-                                                       class="form-control form-control-sm">
-                                                       <option value="" disabled>Select </option>
-                                                       <?php 
-                                                            $query ="SELECT id, name FROM categories";
-                                                            $result = $db->query($query);
-                                                            if($result->num_rows> 0){
-                                                                while($optionData=$result->fetch_assoc()){
-                                                                $selected = "";
-                                                                $option =$optionData['name'];
-                                                                $id =$optionData['id'];
-                                                                if($id == $prod_data["id"] ) $selected =
-                                                                "selected";
-                                                                echo "<option value='".$id."' ".$selected.">
-                                                                    ".$option."</option>";}}
-                                                                
-                                                        ?>
-                                                       
-                                                       
-                                                   </select>
-                                               </div>
+                                           
                                                <div class="col-12">
                                                     <input type="submit" name="sub_update" class="btn btn-primary"
                                                     value="edit">                                                   

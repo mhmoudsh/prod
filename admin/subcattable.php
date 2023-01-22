@@ -88,7 +88,7 @@ if (!isLoggedIn()) {
                                         .'"'.'method="post"' .'>'.
                                         '<input type="hidden" name="id" value='.'"'.$row["id"].'"'." />".
                                         '<input type="submit" name="sub_edit" value="edit"'."/>".
-                                        /* ' <input type="submit" name="sub_view" value="view"'."/>". */
+                                        ' <input type="submit" name="sub_view" value="view"'."/>".
                                         ' <input type="submit" name="sub_delete" value="delete"'."/>".
                                   ' </form>'."</td>
                                 ";                                                       

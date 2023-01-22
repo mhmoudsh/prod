@@ -11,9 +11,9 @@ if (isset($_POST['sub_edit'])) {
 if (isset($_POST['sub_update'])) {
      update_sub();
 }
-/* if (isset($_POST['prod_show'])) {
-    show_prod();
-} */
+if (isset($_POST['sub_view'])) {
+    show_sub();
+}
 if (isset($_POST['sub_delete'])) {
     delete_sub();
 }
@@ -56,6 +56,14 @@ function edit_sub()
     $id = e($_POST['id']);
     $_SESSION['sub'] = $id;
     header('location: edit_sub.php');
+}
+
+function show_sub()
+{
+    global $db, $conn, $errors;
+    $id = e($_POST['id']);
+    $_SESSION['sub'] = $id;
+    header('location: show_sub.php');
 }
 
 
