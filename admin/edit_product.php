@@ -16,9 +16,9 @@ if (!isLoggedIn()) {
   $category = $row['category']; */
   /* $optionData=$result->fetch_assoc() */
   $id=$_SESSION['product'];    
-  $query = "SELECT * FROM products WHERE id= $id";
+  $query = "SELECT * FROM proudcts WHERE id= $id";
   $product = $conn->query($query);
-  
+  $prod_data=$product->fetch_assoc();
   /* unset($_SESSION['product']);
   echo $_SESSION['product']; */
 
@@ -83,7 +83,7 @@ if (!isLoggedIn()) {
                         <div class="card-header" id="print">
 
                             <h5 class="card-title">Product:</h5>
-                            <?php echo $product;?>
+                            
                         </div>
                         <div class="card-body">
                              <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST"
@@ -91,58 +91,57 @@ if (!isLoggedIn()) {
                                      <div class="row">
                                          <div class="col-md-6 col-12">
                                              <div class="form-group">
+                                                <input type="hidden" name="id" value="<?php echo $prod_data['id'];?>">
                                                  <label for="name">name </label>
                                                  <input type="text" id="name" class="form-control"
-                                                     placeholder="name" name="name" />
+                                                     placeholder="name"
+                                                     value="<?php echo $prod_data['name'];?>" name="name" />
                                              </div>
                                          </div>
                                          <div class="col-md-6 col-12">
                                              <div class="form-group">
                                                  <label for="description">description</label>
                                                  <input type="text" id="description" class="form-control"
-                                                     placeholder="description" name="description" />
+                                                     placeholder="description"
+                                                     value="<?php echo $prod_data['description'];?>"
+                                                     name="description" />
                                              </div>
                                          </div>
                                          <div class="col-md-6 col-12">
                                              <div class="form-group">
                                                  <label for="price">Product Price:</label>
-                                                 <input class="form-control" type="text" placeholder="price" id="price"
+                                                 <input class="form-control" value="<?php echo $prod_data['price'];?>"
+                                                     type="text" placeholder="price" id="price"
                                                      name="price" />
                                              </div>
-                                         </div>
-                                         <!-- <div class="col-md-6 col-12">
-                                             <div class="form-group">
-                                                 <label for="image">image</label>
-                                                 <input type="file" id="image" class="form-control"
-                                                     placeholder="image" class="form-control" 
-                                                     name="image" />
-                                             </div>
-                                         </div> -->
-
+                                         </div>       
                                            <div class="col-md-6 col-12">
                                                <div class="form-group">
                                                    <label class="form-label" for="user-role">sub_category</label>
                                                    <select name="sub_id" id="sub_id"
                                                        class="form-control form-control-sm">
-                                                       <option value="">Select </option>
+                                                       <option value="" disabled>Select </option>
                                                        <?php 
                                                             $query ="SELECT id, name FROM sub_cats";
                                                             $result = $db->query($query);
                                                             if($result->num_rows> 0){
                                                                 while($optionData=$result->fetch_assoc()){
+                                                                $selected = "";
                                                                 $option =$optionData['name'];
                                                                 $id =$optionData['id'];
+                                                                if($id == $prod_data["id"] ) $selected =
+                                                                "selected";
+                                                                echo "<option value='".$id."' ".$selected.">
+                                                                    ".$option."</option>";}}
+                                                                
                                                         ?>
-                                                       <option value="<?php echo $id; ?>"><?php echo $option; ?>
-                                                       </option>
-                                                       <?php
-                                                         }}
-                                                        ?>
+                                                       
+                                                       
                                                    </select>
                                                </div>
                                                <div class="col-12">
-                                                <input type="submit" name="prod_add" class="btn btn-primary"
-                                                    value="add">                                                   
+                                                    <input type="submit" name="prod_update" class="btn btn-primary"
+                                                    value="edit">                                                   
                                                    <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                </div>
                                            </div>

@@ -10,9 +10,9 @@ if (isset($_POST['prod_edit'])) {
 if (isset($_POST['prod_update'])) {
     update_prod();
 }
-/* if (isset($_POST['prod_show'])) {
+if (isset($_POST['prod_show'])) {
     show_prod();
-} */
+}
 if (isset($_POST['prod_delete'])) {
     delete_prod();
 }
@@ -80,6 +80,14 @@ function add_prod(){
     
 }
 
+function show_prod()
+{
+    global $db, $conn, $errors;
+    $id = e($_POST['id']);    
+    $_SESSION['product'] = $id;
+    header('location: edit_product.php');
+}
+
 function edit_prod()
 {
     global $db, $conn, $errors;
@@ -92,20 +100,23 @@ function update_prod(){
     global $db, $conn, $errors;
    $id = e($_POST['id']);
    if (empty($id)) {
+    echo "id";
     array_push($errors, "id require");
    }
-   $query = "SELECT * FROM products WHERE id=" . $id;
+   /* $query = "SELECT * FROM products WHERE id=" . $id;
    $product = mysqli_query($conn, $query);   
    $product_arr = [];
-   $subcat_arr = $result->fetch_all(MYSQLI_ASSOC);
+   $subcat_arr = $result->fetch_all(MYSQLI_ASSOC); */
 
-    global $db, $errors;
+    global $db, $conn, $errors;
     $name       =   e($_POST['name']);
     $sub_id     =   e($_POST['sub_id']);
     $des        =   e($_POST['description']);
     $price      =   e($_POST['price']);
+    
 
     if (empty($name)) {
+        echo "name";
         array_push($errors, "subcat name require");
     }
      /*if (empty($image)) {
@@ -137,26 +148,29 @@ function update_prod(){
     */
     
         if (empty($sub_id)) {
+            echo "sub";
             array_push($errors, "subcat categoriy require");
         }
 
         if (empty($des)) {
+            echo "des";
             array_push($errors, "product description require");
         }
 
     
         if (count($errors) == 0) {
-        ////////////////////////////////////////////
-            $query = "UPDATE proudcts SET name='$name', sub_id='$sub_id', description=$des, price=$price  WHERE
-            id='$id' ";
-        
-            mysqli_query($conn, $query);
-            if(mysqli_query($conn, $query)){
-                array_push($success, "subcat updated!");
-                header('location: producttable.php');
-            }else{
-                array_push($errors, "filed to edit !");
+            ////////////////////////////////////////////
+            $sql = "UPDATE proudcts SET name='$name', description='$des', price='$price', sub_id='$sub_id'
+            WHERE id='$id'";
+
+            if (mysqli_query($conn, $sql)) {
+            echo "Record updated successfully";
+            header('location: producttable.php');
+            unset($_SESSION['product']);
+            } else {
+            echo "Error updating record: " . mysqli_error($conn);
             }
+            /*  */
              
             
         }

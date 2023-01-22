@@ -6,7 +6,7 @@ if (!isLoggedIn()) {
      header('location: ..\login.php');
   }
 
-  
+
   
   $sql = "SELECT * FROM proudcts";
   $result = mysqli_query($conn, $sql);
@@ -107,6 +107,7 @@ if (!isLoggedIn()) {
                                   echo "<td>"."<form "."action=".'"'. htmlspecialchars($_SERVER['PHP_SELF']) .'"'.'method="post"' .'>'.
                                         '<input type="hidden" name="id" value='.'"'.$row["id"].'"'."/>".
                                         '<input type="submit" name="prod_edit" value="edit"'."/>".
+                                        '<input type="submit" name="prod_show" value="view"'."/>".
                                         '<input type="submit" name="prod_delete" value="delete"'."/>".
                                   '</form>'."</td>
                                   ";
